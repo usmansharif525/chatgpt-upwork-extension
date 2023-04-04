@@ -37,7 +37,8 @@ function ChatGPTCard(props: Props) {
         Many people don&apos;t like read long proposals, you can specify a response size here in
         words:
         <input
-          type="text"
+          type="number"
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onChange={(e: any) => setResponseSize(e.target.value)}
           placeholder="Response size e.g. 500"
         />

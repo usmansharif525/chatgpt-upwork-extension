@@ -1,8 +1,8 @@
 {
   "appName": {
-    "message": "ChatGPT for Google"
+    "message": "ChatGPT for Upwork bidding"
   },
   "appDesc": {
-    "message": "ChatGPTからの回答を検索エンジンの結果と共に表示します"
+    "message": "ChatGPTを使用してUpworkの仕事の提案を作成します"
   }
 }
