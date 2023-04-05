@@ -1,7 +1,6 @@
 import { Button, Input, Select, Spinner, Tabs, useInput, useToasts } from '@geist-ui/core'
 import { FC, useCallback, useState } from 'react'
 import useSWR from 'swr'
-import { fetchExtensionConfigs } from '../api'
 import { getProviderConfigs, ProviderConfigs, ProviderType, saveProviderConfigs } from '../config'
 
 interface ConfigProps {
@@ -10,8 +9,15 @@ interface ConfigProps {
 }
 
 async function loadModels(): Promise<string[]> {
-  const configs = await fetchExtensionConfigs()
-  return configs.openai_model_names
+  // const configs = await fetchExtensionConfigs()
+  // console.log('configs', configs)
+  // return configs.openai_model_names
+  const hard_coded = {
+    chatgpt_webapp_model_name: 'text-davinci-002-render',
+    openai_model_names: ['text-davinci-003'],
+    openai_chat_model_names: ['gpt-3.5-turbo'],
+  }
+  return hard_coded.openai_model_names
 }
 
 const ConfigPanel: FC<ConfigProps> = ({ config, models }) => {

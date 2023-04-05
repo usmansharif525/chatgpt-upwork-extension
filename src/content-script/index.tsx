@@ -1,6 +1,6 @@
 import { render } from 'preact'
 import '../base.css'
-import { getUserConfig, Theme } from '../config'
+import { getUserConfig, Language, Theme } from '../config'
 import { detectSystemColorScheme } from '../utils'
 import ChatGPTContainer from './ChatGPTContainer'
 import { config } from './site-configs'
@@ -20,11 +20,11 @@ async function mount(question: string) {
   } else {
     theme = userConfig.theme
   }
-  // if (theme === Theme.Dark) {
-  //   container.classList.add('gpt-dark')
-  // } else {
+  if (theme === Theme.Dark) {
+    container.classList.add('gpt-dark')
+  } else {
     container.classList.add('gpt-light')
-  // }
+  }
 
   const mainContainer = getPossibleElementByQuerySelector(siteConfig.mainContainer)
   if (mainContainer) {
@@ -41,7 +41,7 @@ async function mount(question: string) {
 
 async function loadJobDescription() {
   // load description
-  // return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const interval = setInterval(async () => {
       const moreDescription = getPossibleElementByQuerySelector<HTMLInputElement>(
         siteConfig.moreDescription,
@@ -49,11 +49,11 @@ async function loadJobDescription() {
       if (moreDescription) {
         clearInterval(interval)
         moreDescription.click()
-        return true
+        resolve(true)
       }
       // reject(false)
     }, 1000)
-  // })
+  })
 }
 
 function getJobDetail() { 
@@ -68,42 +68,39 @@ function getJobDetail() {
   )?.innerText
 
   // getPossibleElementsByQuerySelectorAll should return an array
-  const jobSkills = getPossibleElementsByQuerySelectorAll<any>(
+  let jobSkills = getPossibleElementsByQuerySelectorAll<any>(
     siteConfig.jobSkills
-  )?.map((skill:HTMLElement) => skill.innerText)
+  )
+  jobSkills = Array.from(jobSkills).map((skill:any) => skill.innerText)
 
   return [jobDescription , jobTitle , jobSkills]
 }
 
 async function run() {
-  mount('What is Your Name?')
-  // await loadJobDescription()
-  // const jobDetail = getJobDetail()
-  // console.log('searchValueWithLanguageOption', jobDetail)
-  // const responseLength = 500;
-  // if(!jobDetail[0] || !jobDetail[1]) {
-  //   return
-  // }
-  // const gptQuery = `
-  //   It's an Upwork job, please help me write a cover letter for it. Thank you!
-  //   My Name: Usman Sharif,
-  //   Client Name: GMS Technology,
-  //   ${responseLength ? `Response Length: ${responseLength},` : ''}
-  //   Job Title: ${jobDetail[1]},
-  //   Job Skills: ${jobDetail[2]?.join(', ')}
-  //   Job Description: ${jobDetail[0]},
-  // `
-  // console.log('gptQuery', gptQuery)
+  await loadJobDescription()
+  const jobDetail = getJobDetail()
+  console.log('searchValueWithLanguageOption', jobDetail)
+  if(!jobDetail[0] || !jobDetail[1]) {
+    return 
+  }
+
+  const userConfig = await getUserConfig()
+  userConfig.language
+  const gptQuery = `
+    ${userConfig.name ? `My Name: ${userConfig.name}, \n ` : ``}
+    Job Title: ${jobDetail[1]}, \n
+    Job Skills: ${jobDetail[2]?.join(',')},\n
+    Job Description: ${jobDetail[0]}, \n
+    It's an Upwork job, please help me write a cover letter for it${userConfig.language === Language.Auto ? `.` : ` in ${userConfig.language} language`}
+  `
+  console.log('gptQuery', gptQuery)
+  mount(gptQuery)
   
   // if (searchValueWithLanguageOption) {
   //   mount(searchValueWithLanguageOption)
   // }
-  // const userConfig = await getUserConfig()
   //
 }
 
 run()
 
-// if (siteConfig.watchRouteChange) {
-//   siteConfig.watchRouteChange(run)
-// }

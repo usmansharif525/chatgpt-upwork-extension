@@ -41,6 +41,7 @@ const userConfigWithDefaultValue = {
   triggerMode: TriggerMode.Always,
   theme: Theme.Auto,
   language: Language.Auto,
+  name: '',
 }
 
 export type UserConfig = typeof userConfigWithDefaultValue

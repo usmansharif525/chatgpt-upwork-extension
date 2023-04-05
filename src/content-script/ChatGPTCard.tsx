@@ -1,4 +1,5 @@
 import { Button } from '@geist-ui/core'
+import { GearIcon, LightBulbIcon } from '@primer/octicons-react'
 import { useState } from 'preact/hooks'
 import { TriggerMode } from '../config'
 import ChatGPTQuery, { QueryStatus } from './ChatGPTQuery'
@@ -31,22 +32,25 @@ function ChatGPTCard(props: Props) {
     return <ChatGPTQuery responseSize={responseSize} question={props.question} onStatusChange={props.onStatusChange} />
   }
   return (
-    <>
-      <p> Click the button below to generate a bid for this job. </p>
+    <div className="markdown-body gpt-markdown" id="gpt-answer" dir="auto">
+      <p className="icon-and-text">
+        <LightBulbIcon size="small" /> Click the button below to generate a bid for this job.
+      </p>
       <p>
-        Many people don&apos;t like read long proposals, you can specify a response size here in
-        words:
+        Many people don&apos;t like read long proposals, <br />
+        you can specify a response size here in words:
         <input
           type="number"
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          className="size-input"
           onChange={(e: any) => setResponseSize(e.target.value)}
           placeholder="Response size e.g. 500"
+          min="50"
         />
       </p>
-      <Button className="icon-and-text cursor-pointer" onClick={() => setTriggered(true)}>
+      <Button className="icon-and-text cursor-pointer generate-btn" onClick={() => setTriggered(true)}>
         Generate Bid
       </Button>
-    </>
+      </div>
   )
 }
 

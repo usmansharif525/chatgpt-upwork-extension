@@ -1,4 +1,4 @@
-import Browser from 'webextension-polyfill'
+import Browser, { browserAction } from 'webextension-polyfill'
 import { getProviderConfigs, ProviderType } from '../config'
 import { ChatGPTProvider, getChatGPTAccessToken, sendMessageFeedback } from './providers/chatgpt'
 import { OpenAIProvider } from './providers/openai'
@@ -64,4 +64,9 @@ Browser.runtime.onInstalled.addListener((details) => {
   if (details.reason === 'install') {
     Browser.runtime.openOptionsPage()
   }
+})
+
+const action = Browser.browserAction || Browser.action
+action?.onClicked.addListener(() => {
+  Browser.runtime.openOptionsPage()
 })

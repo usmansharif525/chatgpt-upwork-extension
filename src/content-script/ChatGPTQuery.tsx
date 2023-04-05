@@ -42,8 +42,13 @@ function ChatGPTQuery(props: Props) {
         setDone(true)
       }
     }
+    let short_q = props.question
+    if ( props.responseSize && props.responseSize > 0) {
+      short_q =  props.question + 'Cover letter should not be around ' + props.responseSize + ' characters long, '
+      console.log('props.question', short_q)
+    }
     port.onMessage.addListener(listener)
-    port.postMessage({ question: props.question })
+    port.postMessage({ question: short_q })
     return () => {
       port.onMessage.removeListener(listener)
       port.disconnect()

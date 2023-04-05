@@ -14,6 +14,7 @@ function ChatGPTContainer(props: Props) {
   return (
     <>
       <div className="chat-gpt-card">
+        
         <ChatGPTCard
           question={props.question}
           triggerMode={props.triggerMode}
