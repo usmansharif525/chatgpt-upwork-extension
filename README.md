@@ -8,9 +8,9 @@
 
 A browser extension to help you write cover letters for Upwork jobs using ChatGPT.
 
-[Install from Chrome Web Store](https://usmansharif.com/upgptchrome?utm_source=github)
+<!-- [Install from Chrome Web Store](https://usmansharif.com/upgptchrome?utm_source=github)
 
-[Install from Mozilla Add-on Store](https://usmansharif.com/upgptfirefox?utm_source=github)
+[Install from Mozilla Add-on Store](https://usmansharif.com/upgptfirefox?utm_source=github) -->
 
 [Changelog](https://upgpt.canny.io/changelog)
 
