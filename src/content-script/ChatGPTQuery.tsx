@@ -7,7 +7,7 @@ import Browser from 'webextension-polyfill'
 import { captureEvent } from '../analytics'
 import { Answer } from '../messaging'
 import ChatGPTFeedback from './ChatGPTFeedback'
-import { isBraveBrowser, shouldShowRatingTip } from './utils.js'
+import { shouldShowRatingTip } from './utils.js'
 
 export type QueryStatus = 'success' | 'error' | undefined
 
@@ -43,9 +43,8 @@ function ChatGPTQuery(props: Props) {
       }
     }
     let short_q = props.question
-    if ( props.responseSize && props.responseSize > 0) {
-      short_q =  props.question + 'Cover letter should not be around ' + props.responseSize + ' characters long, '
-      console.log('props.question', short_q)
+    if (props.responseSize && props.responseSize > 0) {
+      short_q = 'Cover Letter Size: ' + props.responseSize + ' words,\n' + props.question
     }
     port.onMessage.addListener(listener)
     port.postMessage({ question: short_q })
@@ -100,18 +99,18 @@ function ChatGPTQuery(props: Props) {
         <ReactMarkdown rehypePlugins={[[rehypeHighlight, { detect: true }]]}>
           {answer.text}
         </ReactMarkdown>
-        {done && showTip && (
+        {/* {done && showTip && (
           <p className="italic mt-2">
             Enjoy this extension? Give us a 5-star rating at{' '}
             <a
-              href="https://chatgpt4google.com/chrome?utm_source=rating_tip"
+              href="https://usmansharif.com/upgptchrome?utm_source=rating_tip"
               target="_blank"
               rel="noreferrer"
             >
               Chrome Web Store
             </a>
           </p>
-        )}
+        )} */}
       </div>
     )
   }
@@ -125,24 +124,12 @@ function ChatGPTQuery(props: Props) {
         </a>
         {retry > 0 &&
           (() => {
-            if (isBraveBrowser()) {
-              // TODO: remove or change this before release
-              return (
-                <span className="block mt-2">
-                  Still not working? Follow{' '}
-                  <a href="https://github.com/wong2/chat-gpt-google-extension#troubleshooting">
-                    Brave Troubleshooting
-                  </a>
-                </span>
-              )
-            } else {
-              return (
-                <span className="italic block mt-2 text-xs">
-                  OpenAI requires passing a security check every once in a while. If this keeps
-                  happening, change AI provider to OpenAI API in the extension options.
-                </span>
-              )
-            }
+            return (
+              <span className="italic block mt-2 text-xs">
+                OpenAI requires passing a security check every once in a while. If this keeps
+                happening, change AI provider to OpenAI API in the extension options.
+              </span>
+            )
           })()}
       </p>
     )

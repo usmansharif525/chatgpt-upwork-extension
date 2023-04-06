@@ -36,18 +36,17 @@ function ChatGPTCard(props: Props) {
       <p className="icon-and-text">
         <LightBulbIcon size="small" /> Click the button below to generate a bid for this job.
       </p>
-      <p>
-        Many people don&apos;t like read long proposals, <br />
-        you can specify a response size here in words:
+      <div className="my-4">
+        <p className="icon-and-text mb-2">Response size</p>
         <input
           type="number"
-          className="size-input"
+          className="w-full py-1 px-3 rounded border border-gray-300"
           onChange={(e: any) => setResponseSize(e.target.value)}
           placeholder="Response size e.g. 500"
           min="50"
         />
-      </p>
-      <Button className="icon-and-text cursor-pointer generate-btn" onClick={() => setTriggered(true)}>
+      </div>
+      <Button className="icon-and-text cursor-pointer generate-btn " onClick={() => setTriggered(true)}>
         Generate Bid
       </Button>
       </div>

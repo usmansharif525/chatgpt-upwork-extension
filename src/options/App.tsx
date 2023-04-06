@@ -33,7 +33,6 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
 
   useEffect(() => {
     getUserConfig().then((config) => {
-      console.log('config', config)
       setTriggerMode(config.triggerMode)
       setLanguage(config.language)
       setName(config.name)

@@ -10,7 +10,6 @@ interface ConfigProps {
 
 async function loadModels(): Promise<string[]> {
   // const configs = await fetchExtensionConfigs()
-  // console.log('configs', configs)
   // return configs.openai_model_names
   const hard_coded = {
     chatgpt_webapp_model_name: 'text-davinci-002-render',

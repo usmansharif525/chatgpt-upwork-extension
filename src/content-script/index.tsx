@@ -14,17 +14,17 @@ async function mount(question: string) {
   container.className = 'chat-gpt-container'
 
   const userConfig = await getUserConfig()
-  let theme: Theme
-  if (userConfig.theme === Theme.Auto) {
-    theme = detectSystemColorScheme()
-  } else {
-    theme = userConfig.theme
-  }
-  if (theme === Theme.Dark) {
-    container.classList.add('gpt-dark')
-  } else {
+  // let theme: Theme
+  // if (userConfig.theme === Theme.Auto) {
+  //   theme = detectSystemColorScheme()
+  // } else {
+  //   theme = userConfig.theme
+  // }
+  // if (theme === Theme.Dark) {
+  //   container.classList.add('gpt-dark')
+  // } else {
     container.classList.add('gpt-light')
-  }
+  // }
 
   const mainContainer = getPossibleElementByQuerySelector(siteConfig.mainContainer)
   if (mainContainer) {
@@ -57,8 +57,6 @@ async function loadJobDescription() {
 }
 
 function getJobDetail() { 
-  console.log('getJobDetail')
-
   const jobDescription = getPossibleElementByQuerySelector<HTMLElement>(
     siteConfig.jobDescription,
   )?.innerText
@@ -79,7 +77,6 @@ function getJobDetail() {
 async function run() {
   await loadJobDescription()
   const jobDetail = getJobDetail()
-  console.log('searchValueWithLanguageOption', jobDetail)
   if(!jobDetail[0] || !jobDetail[1]) {
     return 
   }
@@ -93,7 +90,6 @@ async function run() {
     Job Description: ${jobDetail[0]}, \n
     It's an Upwork job, please help me write a cover letter for it${userConfig.language === Language.Auto ? `.` : ` in ${userConfig.language} language`}
   `
-  console.log('gptQuery', gptQuery)
   mount(gptQuery)
   
   // if (searchValueWithLanguageOption) {
@@ -103,4 +99,3 @@ async function run() {
 }
 
 run()
-
