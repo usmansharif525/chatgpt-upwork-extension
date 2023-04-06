@@ -1,4 +1,4 @@
-# ChatGPT for Upwork 
+# UpGPT | ChatGPT for Upwork 
 
 ![Visitors](https://visitor-badge.glitch.me/badge?page_id=usmansharif525.chatgpt-upwork-extension&left_color=green&right_color=red)
 [![Twitter Follow](https://img.shields.io/twitter/follow/ItsUsmanSharif?style=social)](https://twitter.com/ItsUsmanSharif)

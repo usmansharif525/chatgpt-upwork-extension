@@ -76,7 +76,7 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
         <div className="flex flex-row items-center gap-2">
           <img src={logo} className="w-10 h-10 rounded-lg" />
           <span className="font-semibold">
-            ChatGPT for Upwork  (v{getExtensionVersion()})
+            UpGPT | ChatGPT for Upwork  (v{getExtensionVersion()})
           </span>
         </div>
         <div className="flex flex-row gap-3">
