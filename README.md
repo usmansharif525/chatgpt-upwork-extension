@@ -1,6 +1,5 @@
 # ChatGPT for Upwork 
 
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/usmansharif525/chatgpt-upwork-extension/pre-release-build.yml)
 ![Visitors](https://visitor-badge.glitch.me/badge?page_id=usmansharif525.chatgpt-upwork-extension&left_color=green&right_color=red)
 [![Twitter Follow](https://img.shields.io/twitter/follow/ItsUsmanSharif?style=social)](https://twitter.com/ItsUsmanSharif)
 ![License](https://img.shields.io/github/license/usmansharif525/chatgpt-upwork-extension)
